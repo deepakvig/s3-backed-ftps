@@ -1,0 +1,13 @@
+== This is a Rails App skeleton, works as starting point for Rails app
+
+
+It contains :
+  Rails 3.2.11
+  Devise model User
+  Twitter Bootstrap
+  RSpec
+  Rails Factory
+  Capybara
+  jQuery
+  Slim
+  Cancan
