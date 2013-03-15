@@ -1,0 +1,4 @@
+= form_tag upload_files_path, :multipart => true do
+  = hidden_field_tag "current_dir", current_dir
+  = file_field_tag "file"
+  = submit_tag "Upload File", :class => "btn btn-warning"

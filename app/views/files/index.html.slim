@@ -26,8 +26,10 @@ table.table
 - if (@dirs.blank? || @dirs.size == 1) && @files.blank?
   h3 No Files in this folder
 
-br
+h4 Upload File to Current Directory
+= render 'upload_form', :current_dir => @current_dir
+
 br
 - if @current_dir != "/"
   .icon-arrow-up
-  = link_to "Back", chdir_files_path(:dir => @prev_dir)
+  = link_to "Parent Directory", chdir_files_path(:dir => @prev_dir)

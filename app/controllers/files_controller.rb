@@ -25,6 +25,15 @@ class FilesController < ApplicationController
     render :index
   end
 
+  def upload
+    if params[:file]
+      path = params[:current_dir] == "/" ? "" : params[:current_dir]
+      @ftps.putbinaryfile(params[:file].path, remotefile = path+"/"+params[:file].original_filename)
+      flash[:alert] = "File Uploaded Successfully"
+    end
+    redirect_to chdir_files_path(:dir => params[:current_dir]) 
+  end
+
   private
   def get_ftps_connection
     @ftps = FtpManager.connect

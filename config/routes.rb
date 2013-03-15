@@ -5,6 +5,7 @@ ImageGallery::Application.routes.draw do
     collection do
       get "download", as: :download
       get "chdir", as: :chdir
+      post "upload", as: :upload
     end
   end
 
