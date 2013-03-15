@@ -1,0 +1,13 @@
+---
+:user:
+:group:
+:bucket: deepakvig-bucket
+:aws_key: AKIAIEJ7ABOSN5R7GLIQ
+:aws_secret: 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
+:daemon:
+:pid_file:
+:remote_passwd_file: passwd
+:remote_passwd_use_bcrypt: false
+:listen:
+  :ip: 0.0.0.0
+  :port: 2100

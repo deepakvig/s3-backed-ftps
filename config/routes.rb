@@ -1,6 +1,15 @@
 ImageGallery::Application.routes.draw do
   devise_for :users
 
+  resources :files do
+    collection do
+      get "download", as: :download
+      get "chdir", as: :chdir
+    end
+  end
+
+  root to: "files#index"
+
   # The priority is based upon order of creation:
   # first created -> highest priority.
 

@@ -1,0 +1,33 @@
+h2 Welcome to the FTP Server
+br
+- if @current_dir
+  .icon-folder-open
+    b= @current_dir
+  br
+  br
+
+table.table
+  tr
+    th File Name
+    th Download
+
+  - @dirs.each do |dir|
+    tr
+      - if format_name(dir) != "."
+        td= link_to format_name(dir), chdir_files_path(:dir => folder_path(dir, @current_dir)), :class => "icon-folder-close"
+        td
+
+  - @files.each do |file|
+    tr
+      td
+        p.icon-file =format_name(file)
+      td= link_to "Download", download_files_path(:dir => "#{@current}/#{format_name(file)}", :file => format_name(file)), :class => "icon-download-alt"
+
+- if (@dirs.blank? || @dirs.size == 1) && @files.blank?
+  h3 No Files in this folder
+
+br
+br
+- if @current_dir != "/"
+  .icon-arrow-up
+  = link_to "Back", chdir_files_path(:dir => @prev_dir)

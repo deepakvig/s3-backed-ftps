@@ -42,6 +42,11 @@ gem 'carrierwave'
 gem 'devise'
 gem 'cancan'
 
+gem "happening", :git => "https://github.com/yob/happening.git"
+gem "em-ftpd", :git => "https://github.com/yob/em-ftpd.git"
+gem "s3ftp", :git => "https://github.com/deepakvig/s3ftp.git"
+gem "double-bag-ftps"
+
 # To use ActiveModel has_secure_password
 # gem 'bcrypt-ruby', '~> 3.0.0'
 
