@@ -4,22 +4,20 @@ class FilesController < ApplicationController
 
   def index
     @dirs, @files = FtpManager.seg(@ftps.list)
-    @current_dir = @ftps.pwd.gsub!("/","")
+    current_path = @ftps.pwd.reverse #.gsub!("/","")
+    @prev_dir = current_path[current_path.index("/")+1..-1].reverse
+    @current_dir = current_path.reverse
   end
 
   def download
     localfile = params[:file]
-    @ftps.get(params[:dir],localfile)
-    flash[:notice] = "Successfully downloaded file #{localfile} to root directory!"
-    redirect_to files_path
+    @ftps.get(get_download_path(params[:dir],localfile),localfile)
+    flash[:alert] = "Successfully downloaded file #{localfile} to root directory!"
+    redirect_to chdir_files_path(:dir => params[:dir])
   end
 
   def chdir
-    dir_path = ""
-    dir_path = params[:prev_dir] + "/" if params[:prev_dir] and !params[:prev_dir].blank?
-    dir_path += params[:dir]
-    puts dir_path
-    @ftps.chdir(dir_path)
+    @ftps.chdir(get_directory_path(params[:prev_dir], params[:dir]))
     @dirs, @files = FtpManager.seg(@ftps.list)
     current_path = @ftps.pwd.reverse #.gsub!("/","")
     @prev_dir = current_path[current_path.index("/")+1..-1].reverse
@@ -34,5 +32,18 @@ class FilesController < ApplicationController
 
   def close_ftps_connection
     @ftps.close
+  end
+
+  def get_download_path(dir, file)
+    file_path = dir+"/"+ file if dir != "/"
+    file_path = dir+file if dir == "/"
+    file_path
+  end
+
+  def get_directory_path(prev_dir, dir)
+    dir_path = ""
+    dir_path = params[:prev_dir] + "/" if params[:prev_dir] and !params[:prev_dir].blank?
+    dir_path += params[:dir]
+    dir_path
   end
 end

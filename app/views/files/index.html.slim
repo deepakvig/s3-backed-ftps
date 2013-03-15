@@ -21,7 +21,7 @@ table.table
     tr
       td
         p.icon-file =format_name(file)
-      td= link_to "Download", download_files_path(:dir => "#{@current}/#{format_name(file)}", :file => format_name(file)), :class => "icon-download-alt"
+      td= link_to "Download", download_files_path(:dir => @current_dir, :file => format_name(file)), :class => "icon-download-alt"
 
 - if (@dirs.blank? || @dirs.size == 1) && @files.blank?
   h3 No Files in this folder
